@@ -2,16 +2,95 @@
 
 Aplicación de escritorio en Python y PySide6 con motor local Cubiomes para Minecraft Java 26.3.
 
-## Ejecutar en Windows de 64 bits / PowerShell
+## Descargar el programa
+
+**[Descargar ZIP de Minecraft Structure Finder](https://github.com/YonnyAg/minecraft-structure-finder/archive/refs/heads/main.zip)**
+
+También puedes abrir [el repositorio en GitHub](https://github.com/YonnyAg/minecraft-structure-finder), pulsar el botón verde **Code** y elegir **Download ZIP**. No necesitas instalar Git.
+
+Esta descarga contiene el código del programa y su motor. **Esta versión se ejecuta con Python; todavía no hay un instalador `.exe`.**
+
+## Requisitos
+
+- Windows 10/11 de **64 bits**, arquitectura **x64** (Intel o AMD). El motor incluido no es para Windows ARM64, Linux o macOS.
+- **Python 3.11 o superior de 64 bits**, con `pip`. La aplicación se probó con Python 3.11.
+- Conexión a internet durante la instalación de dependencias. Después, las búsquedas funcionan sin conexión.
+- Una seed de **Minecraft Java 26.3**, con generación estándar. Esta versión del buscador admite cabañas de brujas del Overworld.
+
+Es una aplicación externa: no necesitas instalar mods ni tener Minecraft abierto. No modifica tu mundo.
+
+## Instalar y abrir por primera vez
+
+### 1. Instala Python
+
+Descarga Python desde [la página oficial para Windows](https://www.python.org/downloads/windows/). Elige un **Windows installer (64-bit)**; evita los instaladores de 32 bits, ARM64 y los paquetes *embeddable*.
+
+Si el instalador ofrece la opción **Add python.exe to PATH**, márcala. Mantén habilitado `pip`. Al terminar, cierra y vuelve a abrir la terminal si ya tenías una abierta.
+
+### 2. Extrae el ZIP
+
+Haz clic derecho sobre el ZIP descargado y selecciona **Extraer todo**. Entra en la carpeta extraída `minecraft-structure-finder-main`, donde se encuentran `README.md`, `pyproject.toml` e `iniciar.bat`.
+
+**No ejecutes el programa desde dentro del ZIP.**
+
+### 3. Abre PowerShell en esa carpeta
+
+En el Explorador de archivos, entra en la carpeta del programa, haz clic en la barra de direcciones, escribe `powershell` y pulsa **Enter**.
+
+### 4. Instala las dependencias
+
+Ejecuta estos comandos en orden. Espera a que termine cada uno antes de continuar:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e .
+```
+
+El punto final de `install -e .` forma parte del comando. Se creará una carpeta `.venv` con el entorno y las dependencias del programa. No necesitas activar el entorno ni cambiar la política de ejecución de PowerShell.
+
+La DLL compilada está incluida en `mc_finder/_native/`; **no necesitas un compilador ni reconstruir el motor** para usar el programa.
+
+### 5. Abre la aplicación
+
+Haz doble clic en **`iniciar.bat`**. También puedes abrirla desde PowerShell:
+
+```powershell
 .\.venv\Scripts\python.exe -m mc_finder
 ```
 
-También puedes usar `iniciar.bat` después de instalar las dependencias.
-La DLL compilada está incluida en `mc_finder/_native/`; no necesitas un compilador para ejecutar la aplicación.
+En los siguientes usos solo necesitas abrir `iniciar.bat`. Mantén la carpeta `.venv` junto al archivo; si mueves el proyecto a otra ruta, vuelve a crear el entorno e instalar las dependencias allí.
+
+## Prueba rápida después de instalar
+
+1. Pulsa **Cargar ejemplo**.
+2. Deja seleccionada **Estructura más cercana**.
+3. Pulsa **Buscar estructuras**.
+4. Con la seed de ejemplo, debe aparecer una cabaña en **X: −2368, Z: 656**.
+
+Para probar los grupos, selecciona **Agrupación de estructuras**, cantidad mínima **2** y radio del grupo **200**. Con el área del ejemplo deben aparecer **3 grupos**.
+
+## Problemas frecuentes
+
+| Problema | Qué revisar |
+| --- | --- |
+| `python` no se reconoce o abre Microsoft Store | Comprueba la instalación y `PATH`. Si tienes el lanzador `py`, usa `py -3 -m venv .venv` para el primer comando. Los demás comandos no cambian. |
+| `iniciar.bat` dice que primero debes instalar | Ejecuta los dos comandos de instalación dentro de la carpeta que contiene `pyproject.toml`. |
+| `No module named PySide6` | Repite `.\.venv\Scripts\python.exe -m pip install -e .` dentro de la carpeta del programa. |
+| Error al cargar `finder.dll` | Confirma que usas Windows x64 y Python de 64 bits, y que extrajiste el ZIP completo. |
+| La instalación de dependencias falla | Revisa la conexión y conserva el mensaje de error para comunicar el problema en [Issues](https://github.com/YonnyAg/minecraft-structure-finder/issues). |
+| No aparecen grupos | Reduce la cantidad mínima, amplía el radio del grupo o el área de exploración. Una seed no garantiza agrupaciones para cualquier condición. |
+
+Puedes comprobar tu versión y arquitectura de Python con:
+
+```powershell
+python -c "import sys, struct; print(sys.version); print(struct.calcsize('P') * 8, 'bits')"
+```
+
+## Enlace para compartir en YouTube
+
+Comparte [la página principal del proyecto](https://github.com/YonnyAg/minecraft-structure-finder): contiene la descarga y estas instrucciones. El botón **Descargar ZIP** de arriba obtiene la versión de la rama `main`.
+
+Si el repositorio es privado, solo pueden acceder las cuentas autorizadas. Para distribuirlo a cualquier espectador debe estar público.
 
 ## Qué permite esta etapa
 
