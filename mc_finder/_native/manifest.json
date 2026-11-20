@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/xpple/cubiomes",
+  "commit": "d3290a8f421863b737ae7c31ad3d800b4fc584c7",
+  "source_archive_sha256": "3186af9f7206ae4a2d9575492ba649eec2ad18f054d6b94e87591b3099c600ec",
+  "minecraft": "26.3",
+  "abi": 1,
+  "platform": "windows-x64",
+  "binary_sha256": "ba52c0b5d41ee3776ed80ce84216a342de01969057005c1a5d6a0e7e9bd96b2b",
+  "compiler": "ziglang 0.16.0 (zig cc)"
+}

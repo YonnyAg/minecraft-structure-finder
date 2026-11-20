@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minecraft-structure-finder"
+version = "0.4.0"
+description = "Buscador de estructuras de Minecraft Java con interfaz de escritorio."
+requires-python = ">=3.11"
+dependencies = ["PySide6>=6.7,<7"]
+
+[project.gui-scripts]
+mc-finder = "mc_finder.app:main"
+
+[tool.setuptools.packages.find]
+include = ["mc_finder*"]
+
+[tool.setuptools.package-data]
+mc_finder = ["_native/*.dll", "_native/*.json", "_native/*LICENSE*", "_native/*license*"]

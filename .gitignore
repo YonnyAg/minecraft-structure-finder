@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.qa/
+mc_finder/_native/*.pdb
+mc_finder/_native/*.lib
