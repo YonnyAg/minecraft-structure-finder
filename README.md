@@ -1,96 +1,57 @@
 # Minecraft Structure Finder
 
-Aplicación de escritorio en Python y PySide6 con motor local Cubiomes para Minecraft Java 26.3.
+Buscador de cabañas de brujas, agrupaciones y perímetros para Minecraft Java 26.3.
 
-## Descargar el programa
+## Descargar para Windows — sin instalar Python
 
-**[Descargar ZIP de Minecraft Structure Finder](https://github.com/YonnyAg/minecraft-structure-finder/archive/refs/heads/main.zip)**
+**[Descargar Minecraft Structure Finder v1.0.0 para Windows x64 (.exe en ZIP)](https://github.com/YonnyAg/minecraft-structure-finder/releases/download/v1.0.0/MinecraftStructureFinder-v1.0.0-windows-x64.zip)**
 
-También puedes abrir [el repositorio en GitHub](https://github.com/YonnyAg/minecraft-structure-finder), pulsar el botón verde **Code** y elegir **Download ZIP**. No necesitas instalar Git.
+También puedes entrar en [Releases / última versión](https://github.com/YonnyAg/minecraft-structure-finder/releases/latest) y descargar el archivo **MinecraftStructureFinder-v1.0.0-windows-x64.zip** de **Assets**.
 
-Esta descarga contiene el código del programa y su motor. **Esta versión se ejecuta con Python; todavía no hay un instalador `.exe`.**
+**No necesitas Python, una consola, Git ni mods.** La descarga incluye el ejecutable, el motor y las dependencias. Es una aplicación portable: no necesita instalador.
+
+## Cómo abrirlo
+
+1. Descarga el ZIP de la versión para Windows desde el enlace de arriba.
+2. Haz clic derecho en el ZIP y selecciona **Extraer todo**.
+3. Entra en la carpeta extraída **MinecraftStructureFinder**.
+4. Haz doble clic en **MinecraftStructureFinder.exe**.
+
+Conserva la carpeta **`_internal`** junto al `.exe`: contiene los archivos necesarios para funcionar. Puedes mover la carpeta completa a otra ubicación. No abras el programa desde dentro del ZIP ni copies únicamente el `.exe`.
+
+Los archivos **Source code (zip)** y **Code → Download ZIP** son para desarrollar el proyecto; para usar el programa descarga el ZIP de Windows que contiene el `.exe`.
 
 ## Requisitos
 
-- Windows 10/11 de **64 bits**, arquitectura **x64** (Intel o AMD). El motor incluido no es para Windows ARM64, Linux o macOS.
-- **Python 3.11 o superior de 64 bits**, con `pip`. La aplicación se probó con Python 3.11.
-- Conexión a internet durante la instalación de dependencias. Después, las búsquedas funcionan sin conexión.
-- Una seed de **Minecraft Java 26.3**, con generación estándar. Esta versión del buscador admite cabañas de brujas del Overworld.
+- Windows 10/11 de **64 bits**, arquitectura **x64** (Intel o AMD).
+- Una seed de **Minecraft Java 26.3**, con generación estándar. Esta versión admite cabañas de brujas del Overworld.
+- Internet para descargar el ZIP; las búsquedas funcionan sin conexión.
 
-Es una aplicación externa: no necesitas instalar mods ni tener Minecraft abierto. No modifica tu mundo.
+No es compatible con Bedrock, Windows ARM64, Linux o macOS en esta versión. Minecraft no necesita estar abierto y el programa no modifica tu mundo.
 
-## Instalar y abrir por primera vez
-
-### 1. Instala Python
-
-Descarga Python desde [la página oficial para Windows](https://www.python.org/downloads/windows/). Elige un **Windows installer (64-bit)**; evita los instaladores de 32 bits, ARM64 y los paquetes *embeddable*.
-
-Si el instalador ofrece la opción **Add python.exe to PATH**, márcala. Mantén habilitado `pip`. Al terminar, cierra y vuelve a abrir la terminal si ya tenías una abierta.
-
-### 2. Extrae el ZIP
-
-Haz clic derecho sobre el ZIP descargado y selecciona **Extraer todo**. Entra en la carpeta extraída `minecraft-structure-finder-main`, donde se encuentran `README.md`, `pyproject.toml` e `iniciar.bat`.
-
-**No ejecutes el programa desde dentro del ZIP.**
-
-### 3. Abre PowerShell en esa carpeta
-
-En el Explorador de archivos, entra en la carpeta del programa, haz clic en la barra de direcciones, escribe `powershell` y pulsa **Enter**.
-
-### 4. Instala las dependencias
-
-Ejecuta estos comandos en orden. Espera a que termine cada uno antes de continuar:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
-```
-
-El punto final de `install -e .` forma parte del comando. Se creará una carpeta `.venv` con el entorno y las dependencias del programa. No necesitas activar el entorno ni cambiar la política de ejecución de PowerShell.
-
-La DLL compilada está incluida en `mc_finder/_native/`; **no necesitas un compilador ni reconstruir el motor** para usar el programa.
-
-### 5. Abre la aplicación
-
-Haz doble clic en **`iniciar.bat`**. También puedes abrirla desde PowerShell:
-
-```powershell
-.\.venv\Scripts\python.exe -m mc_finder
-```
-
-En los siguientes usos solo necesitas abrir `iniciar.bat`. Mantén la carpeta `.venv` junto al archivo; si mueves el proyecto a otra ruta, vuelve a crear el entorno e instalar las dependencias allí.
-
-## Prueba rápida después de instalar
+## Prueba rápida
 
 1. Pulsa **Cargar ejemplo**.
 2. Deja seleccionada **Estructura más cercana**.
 3. Pulsa **Buscar estructuras**.
-4. Con la seed de ejemplo, debe aparecer una cabaña en **X: −2368, Z: 656**.
+4. Debe aparecer una cabaña en **X: −2368, Z: 656**.
 
-Para probar los grupos, selecciona **Agrupación de estructuras**, cantidad mínima **2** y radio del grupo **200**. Con el área del ejemplo deben aparecer **3 grupos**.
+Para probar agrupaciones, selecciona **Agrupación de estructuras**, cantidad mínima **2** y radio del grupo **200**. Con el área del ejemplo aparecen **3 grupos**.
 
 ## Problemas frecuentes
 
 | Problema | Qué revisar |
 | --- | --- |
-| `python` no se reconoce o abre Microsoft Store | Comprueba la instalación y `PATH`. Si tienes el lanzador `py`, usa `py -3 -m venv .venv` para el primer comando. Los demás comandos no cambian. |
-| `iniciar.bat` dice que primero debes instalar | Ejecuta los dos comandos de instalación dentro de la carpeta que contiene `pyproject.toml`. |
-| `No module named PySide6` | Repite `.\.venv\Scripts\python.exe -m pip install -e .` dentro de la carpeta del programa. |
-| Error al cargar `finder.dll` | Confirma que usas Windows x64 y Python de 64 bits, y que extrajiste el ZIP completo. |
-| La instalación de dependencias falla | Revisa la conexión y conserva el mensaje de error para comunicar el problema en [Issues](https://github.com/YonnyAg/minecraft-structure-finder/issues). |
+| No encuentro el `.exe` | Descarga el archivo `MinecraftStructureFinder-v1.0.0-windows-x64.zip` de Releases, no el ZIP del código fuente. |
+| No abre o faltan archivos/DLL | Extrae el ZIP completo y conserva `_internal` al lado del ejecutable. Comprueba que usas Windows x64. |
 | No aparecen grupos | Reduce la cantidad mínima, amplía el radio del grupo o el área de exploración. Una seed no garantiza agrupaciones para cualquier condición. |
-
-Puedes comprobar tu versión y arquitectura de Python con:
-
-```powershell
-python -c "import sys, struct; print(sys.version); print(struct.calcsize('P') * 8, 'bits')"
-```
+| Otro error | Indica la versión, los pasos y el mensaje de error en [Issues](https://github.com/YonnyAg/minecraft-structure-finder/issues). |
 
 ## Enlace para compartir en YouTube
 
-Comparte [la página principal del proyecto](https://github.com/YonnyAg/minecraft-structure-finder): contiene la descarga y estas instrucciones. El botón **Descargar ZIP** de arriba obtiene la versión de la rama `main`.
+Comparte [la última versión para descargar](https://github.com/YonnyAg/minecraft-structure-finder/releases/latest) o [la página del proyecto con instrucciones](https://github.com/YonnyAg/minecraft-structure-finder#descargar-para-windows--sin-instalar-python).
 
-Si el repositorio es privado, solo pueden acceder las cuentas autorizadas. Para distribuirlo a cualquier espectador debe estar público.
+Si el repositorio es privado, solo pueden acceder las cuentas autorizadas. Para que cualquier espectador pueda descargarlo debe estar público.
 
 ## Qué permite esta etapa
 
@@ -160,7 +121,37 @@ Las coordenadas son referencias de generación, no necesariamente la puerta o el
 No cubre datapacks/mods de generación, biomas grandes ni zonas generadas en versiones anteriores.
 Los resultados deben contrastarse en un mundo estándar Java 26.3 antes de considerarlos verificados.
 
-## Organización
+## Ejecutar desde el código fuente (solo desarrollo)
+
+La descarga `.exe` de Releases ya incluye todo. Los comandos siguientes son únicamente para modificar el proyecto desde Python:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m mc_finder
+```
+
+Requiere Python 3.11 o superior de 64 bits. `iniciar.bat` es un acceso para esta modalidad de desarrollo, no para la distribución portable.
+
+## Reconstruir el ejecutable de Windows (solo desarrollo)
+
+```powershell
+python -m venv .build-venv
+.\.build-venv\Scripts\python.exe -m pip install -r requirements-build.txt
+.\.build-venv\Scripts\python.exe scripts/build_windows.py
+```
+
+Genera `dist/MinecraftStructureFinder/MinecraftStructureFinder.exe` y un ZIP versionado con checksum SHA-256. La compilación debe realizarse en Windows x64. El paquete usa bibliotecas compartidas y adjunta los avisos de licencia; no hace falta reconstruir Cubiomes.
+
+Para verificar el ZIP extraído y su ejecutable, con Python fuera de PATH:
+
+```powershell
+.\.build-venv\Scripts\python.exe scripts/check_windows_bundle.py
+```
+
+La comprobación abre brevemente la aplicación y valida búsquedas reales, grupos, perímetro, copia y cancelación. El informe queda en `.qa/windows-frozen-smoke.json`.
+
+## Organización del código
 
 - `mc_finder/domain.py`: parámetros, catálogo y contrato inicial de ubicaciones; independiente de Qt.
 - `mc_finder/services.py`: validación, errores e interfaz `SearchEngine`.
